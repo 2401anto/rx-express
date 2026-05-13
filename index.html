@@ -14,12 +14,16 @@
             background-color: #25d366;
             color: white;
             border-radius: 50px;
-            padding: 15px 25px;
+            padding: 12px 20px;
             z-index: 100;
             display: flex;
             align-items: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             transition: transform 0.3s ease;
+            font-size: 14px;
+        }
+        @media (min-width: 768px) {
+            .whatsapp-btn { padding: 15px 25px; font-size: 16px; }
         }
         .whatsapp-btn:hover { transform: scale(1.1); background-color: #128c7e; }
         
@@ -52,10 +56,13 @@
             transition: transform 0.5s ease;
         }
         #modal-img {
-            height: 320px;
+            height: 200px;
             object-fit: contain;
             background-color: #f9fafb;
-            padding: 20px;
+            padding: 10px;
+        }
+        @media (min-width: 768px) {
+            #modal-img { height: 320px; padding: 20px; }
         }
 
         /* QR Estilo */
@@ -78,22 +85,23 @@
         <span>¿Necesitas ayuda?</span>
     </a>
 
-    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 z-[100] items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl relative border-none">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-black text-2xl z-10">&times;</button>
+    <!-- MODAL RESPONSIVO -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 z-[100] items-center justify-center p-2 sm:p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl relative border-none">
+            <button onclick="closeModal()" class="absolute top-2 right-4 text-gray-500 hover:text-black text-3xl z-10">&times;</button>
             <img id="modal-img" src="" alt="" class="w-full">
-            <div class="p-6">
-                <span id="modal-tag" class="text-xs font-bold uppercase p-1 rounded bg-blue-100 text-blue-600"></span>
-                <h2 id="modal-title" class="text-2xl font-bold text-gray-800 mt-2"></h2>
-                <p id="modal-desc" class="text-gray-600 my-4 text-sm leading-relaxed"></p>
+            <div class="p-4 sm:p-6">
+                <span id="modal-tag" class="text-[10px] font-bold uppercase p-1 rounded bg-blue-100 text-blue-600"></span>
+                <h2 id="modal-title" class="text-xl sm:text-2xl font-bold text-gray-800 mt-2"></h2>
+                <p id="modal-desc" class="text-gray-600 my-4 text-xs sm:text-sm leading-relaxed"></p>
                 <div id="driver-container" class="mb-6">
-                    <a id="modal-driver" href="#" target="_blank" class="flex items-center text-blue-600 font-bold hover:text-blue-800 bg-blue-50 p-3 rounded-lg border border-blue-200 transition">
-                        <i class="fas fa-download mr-3"></i> Descargar Drivers / Soporte
+                    <a id="modal-driver" href="#" target="_blank" class="flex items-center text-blue-600 text-sm font-bold hover:text-blue-800 bg-blue-50 p-3 rounded-lg border border-blue-200 transition">
+                        <i class="fas fa-download mr-3"></i> Soporte / Drivers
                     </a>
                 </div>
-                <div class="flex justify-between items-center border-t pt-4">
-                    <span id="modal-price" class="text-3xl font-extrabold text-gray-900"></span>
-                    <a id="modal-whatsapp" href="#" target="_blank" class="bg-green-500 text-white px-6 py-2 rounded-full font-bold hover:bg-green-600 transition flex items-center">
+                <div class="flex flex-col sm:flex-row justify-between items-center border-t pt-4 gap-4">
+                    <span id="modal-price" class="text-2xl sm:text-3xl font-extrabold text-gray-900"></span>
+                    <a id="modal-whatsapp" href="#" target="_blank" class="w-full sm:w-auto bg-green-500 text-white px-6 py-2 rounded-full font-bold hover:bg-green-600 transition flex items-center justify-center">
                         <i class="fab fa-whatsapp mr-2"></i> Pedir Ahora
                     </a>
                 </div>
@@ -103,35 +111,35 @@
 
     <nav class="bg-blue-900 text-white p-4 sticky top-0 z-50 shadow-lg">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold tracking-tighter">REPARACIONES<span class="text-blue-400">EXPRESS</span></h1>
-            <ul class="hidden md:flex space-x-6 font-medium">
+            <h1 class="text-xl sm:text-2xl font-bold tracking-tighter">REPARACIONES<span class="text-blue-400">EXPRESS</span></h1>
+            <ul class="hidden lg:flex space-x-6 font-medium">
                 <li><a href="#productos" class="hover:text-blue-300 transition">Catálogo</a></li>
                 <li><a href="#software" class="hover:text-blue-300 transition text-yellow-400">Software</a></li>
                 <li><a href="#contacto" class="hover:text-blue-300 transition">Ubicación</a></li>
             </ul>
-            <div class="flex items-center space-x-5">
+            <div class="flex items-center space-x-3 sm:space-x-5">
                 <div class="relative group">
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Banco%20Pichincha%20Cuenta%20de%20Ahorros%202200156473%20a%20Nombre%20de%20Antonio%20Jaramillo" 
-                         alt="QR Pago" class="w-10 h-10 rounded shadow-md qr-header bg-white p-0.5">
+                         alt="QR Pago" class="w-8 h-8 sm:w-10 sm:h-10 rounded shadow-md qr-header bg-white p-0.5">
                 </div>
-                <div class="flex items-center bg-blue-800/50 px-3 py-1 rounded-full border border-blue-700">
-                    <div class="flex items-center mr-3 text-xs border-r border-blue-700 pr-3">
-                        <i class="fas fa-eye mr-2 text-blue-300"></i>
+                <div class="flex items-center bg-blue-800/50 px-2 sm:px-3 py-1 rounded-full border border-blue-700">
+                    <div class="flex items-center mr-2 sm:mr-3 text-[10px] sm:text-xs border-r border-blue-700 pr-2 sm:pr-3">
+                        <i class="fas fa-eye mr-1 sm:mr-2 text-blue-300"></i>
                         <span id="visit-count" class="font-mono font-bold text-blue-100">2500</span>
                     </div>
-                    <i class="fas fa-search cursor-pointer hover:text-blue-300 transition"></i>
+                    <i class="fas fa-search cursor-pointer hover:text-blue-300 transition text-xs sm:text-sm"></i>
                 </div>
             </div>
         </div>
     </nav>
 
-    <header class="relative h-[450px] overflow-hidden bg-slate-900">
+    <header class="relative h-[300px] sm:h-[450px] overflow-hidden bg-slate-900">
         <div class="slide active relative h-full">
             <img src="https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover opacity-60" alt="Banner 1">
             <div class="absolute inset-0 flex items-center justify-center text-center text-white p-4">
                 <div>
-                    <h2 class="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg uppercase">Repuestos Originales</h2>
-                    <p class="text-xl md:text-2xl text-blue-300 font-light drop-shadow-md">Todo lo que tu Ricoh necesita en un solo lugar.</p>
+                    <h2 class="text-2xl sm:text-4xl md:text-6xl font-extrabold mb-2 sm:mb-4 drop-shadow-lg uppercase">Repuestos Originales</h2>
+                    <p class="text-sm sm:text-xl md:text-2xl text-blue-300 font-light drop-shadow-md">Todo lo que tu Ricoh necesita.</p>
                 </div>
             </div>
         </div>
@@ -139,26 +147,26 @@
             <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover opacity-60" alt="Banner 2">
             <div class="absolute inset-0 flex items-center justify-center text-center text-white p-4">
                 <div>
-                    <h2 class="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg uppercase">Computación Avanzada</h2>
-                    <p class="text-xl md:text-2xl text-blue-300 font-light drop-shadow-md">Equipos de alta gama para tu oficina o negocio.</p>
+                    <h2 class="text-2xl sm:text-4xl md:text-6xl font-extrabold mb-2 sm:mb-4 drop-shadow-lg uppercase">Computación Avanzada</h2>
+                    <p class="text-sm sm:text-xl md:text-2xl text-blue-300 font-light drop-shadow-md">Equipos de alta gama para tu oficina.</p>
                 </div>
             </div>
         </div>
-        <button onclick="changeSlide(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition z-20"><i class="fas fa-chevron-left"></i></button>
-        <button onclick="changeSlide(1)" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition z-20"><i class="fas fa-chevron-right"></i></button>
+        <button onclick="changeSlide(-1)" class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 sm:p-3 rounded-full transition z-20"><i class="fas fa-chevron-left"></i></button>
+        <button onclick="changeSlide(1)" class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 sm:p-3 rounded-full transition z-20"><i class="fas fa-chevron-right"></i></button>
     </header>
 
-    <main id="productos" class="container mx-auto my-12 px-4">
-        <h3 class="text-3xl font-bold text-gray-800 mb-8 border-b-4 border-blue-600 inline-block pb-2">Catálogo Completo</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <main id="productos" class="container mx-auto my-8 sm:my-12 px-4">
+        <h3 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8 border-b-4 border-blue-600 inline-block pb-2">Catálogo Completo</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             
-            <!-- PRODUCTOS RESTAURADOS -->
-            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('PANTALLA 15.6 SLIM', 'Es la medida más popular para laptops multimedia y de alto rendimiento (gaming), ofreciendo un área de trabajo más amplia. Resolución común: Predomina el Full HD (1920 x 1080), con opciones de 4K en modelos profesionales. Frecuencia de actualización: En modelos estándar es de 60Hz, pero en versiones Slim para gaming sube a 120Hz o 144Hz. Conector: Estándar de 30 pines ubicado usualmente en la parte inferior derecha (visto desde atrás). Superficie: Disponible en acabado Mate (antireflejante) o Brillante (colores más vivos)..', '$70.00', 'imagenes/pantalla15.6.png', 'REPUESTOS')">
+            <!-- PRODUCTOS -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('PANTALLA 15.6 SLIM', 'Es la medida más popular para laptops multimedia y de alto rendimiento (gaming), ofreciendo un área de trabajo más amplia. Resolución común: Predomina el Full HD (1920 x 1080). Conector: Estándar de 30 pines.', '$70.00', 'imagenes/pantalla15.6.png', 'REPUESTOS')">
                 <div class="product-img-container"><img src="imagenes/pantalla15.6.png" class="group-hover:scale-110"></div>
                 <div class="p-5"><p class="text-blue-600 text-xs font-bold uppercase">REPUESTOS</p><h4 class="font-bold text-gray-800">PANTALLA 15.6 SLIM</h4><span class="text-2xl font-bold">$70.00</span></div>
             </div>
 
-            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('PANTALLA 14.0 SLIM', 'Es el estándar actual para equipos portátiles de oficina y estudio, equilibrando movilidad y visibilidad. Resolución común: Generalmente HD (1366 x 768) o Full HD (1920 x 1080). Conector: Suele ser de 30 pines (eDP), aunque modelos más antiguos o de gama alta pueden variar a 40 pines. Tecnología de panel: Mayoritariamente LED con variantes IPS para mejores ángulos de visión. Diseño: Bordes reducidos (NanoEdge o Slim) y un grosor de panel de aproximadamente 3mm..', '$65.00', 'imagenes/pantalla14.0 .png', 'REPUESTOS')">
+            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('PANTALLA 14.0 SLIM', 'Es el estándar actual para equipos portátiles de oficina y estudio, equilibrando movilidad y visibilidad. Resolución común: Generalmente HD o Full HD. Conector: Suele ser de 30 pines.', '$65.00', 'imagenes/pantalla14.0 .png', 'REPUESTOS')">
                 <div class="product-img-container"><img src="imagenes/pantalla14.0 .png" class="group-hover:scale-110"></div>
                 <div class="p-5"><p class="text-blue-600 text-xs font-bold uppercase">REPUESTOS</p><h4 class="font-bold text-gray-800">PANTALLA 14.0 SLIM</h4><span class="text-2xl font-bold">$65.00</span></div>
             </div>
@@ -168,77 +176,57 @@
                 <div class="p-5"><p class="text-blue-600 text-xs font-bold uppercase">PC DE ESCRITORIO</p><h4 class="font-bold text-gray-800">Dell OptiPlex</h4><span class="text-2xl font-bold">$320.00</span></div>
             </div>
 
-            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('Ricoh MP 4055', 'Es una multifuncional robusta diseñada para grupos de trabajo medianos a grandes que priorizan la velocidad de texto y documentos de oficina. Velocidad: 40 páginas por minuto (ppm). Panel de Control: Pantalla inteligente de 10.1 pulgadas (Smart Operation Panel) con interfaz tipo tablet. Escaneo: Hasta 110 ipm (imágenes por minuto) en simple faz y 180 ipm en dúplex (con alimentador SPDF). Versatilidad: Soporta gramajes de hasta 300 g/m2 Memoria: 2 GB de RAM y 320 GB de disco duro..', '$2,100.00', 'imagenes/mp 4055.png', 'COPIADORA', 'https://support.ricoh.com/bb/pub_e/dr_ut_e/0001343/0001343274/V3300/z06725L16.exe')">
+            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('Ricoh MP 4055', 'Multifuncional robusta. Velocidad: 40 ppm. Pantalla inteligente de 10.1 pulgadas. Escaneo rápido.', '$2,100.00', 'imagenes/mp 4055.png', 'COPIADORA', 'https://support.ricoh.com/bb/pub_e/dr_ut_e/0001343/0001343274/V3300/z06725L16.exe')">
                 <div class="product-img-container"><img src="imagenes/mp 4055.png" class="group-hover:scale-110"></div>
                 <div class="p-5"><p class="text-orange-600 text-xs font-bold uppercase">COPIADORA</p><h4 class="font-bold text-gray-800">Ricoh MP 4055</h4><span class="text-2xl font-bold">$2,100.00</span></div>
             </div>
 
-            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('Ricoh MPC 307', 'Es un equipo compacto de escritorio, ideal para espacios reducidos, pero con potencia de una máquina de pasillo. Velocidad: 31 ppm tanto en color como en blanco y negro. Diseño: Formato A4 (legal/oficio), más pequeña que las demás de esta lista. Alimentador: Incluye de serie el alimentador de un solo paso (SPDF) para escaneo rápido de ambas caras. Conectividad: Alta integración con aplicaciones en la nube y dispositivos móviles..', '$850.00', 'imagenes/mpc307.jpg', 'COPIADORA', 'https://support.ricoh.com/bb/pub_e/dr_ut_e/0001343/0001343269/V3300/z06726L16.exe')">
+            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('Ricoh MPC 307', 'Equipo compacto de escritorio. 31 ppm color/BN. Ideal para espacios reducidos.', '$850.00', 'imagenes/mpc307.jpg', 'COPIADORA', 'https://support.ricoh.com/bb/pub_e/dr_ut_e/0001343/0001343269/V3300/z06726L16.exe')">
                 <div class="product-img-container"><img src="imagenes/mpc307.jpg" class="group-hover:scale-110"></div>
                 <div class="p-5"><p class="text-orange-600 text-xs font-bold uppercase">COPIADORA</p><h4 class="font-bold text-gray-800">Ricoh MPC 307</h4><span class="text-2xl font-bold">$850.00</span></div>
             </div>
 
-            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('Ricoh MP 2004', 'El modelo de entrada para oficina en formato A3 (tabloide) de la serie. Velocidad: 20 ppm. Sensor de Movimiento: Activa el panel de control antes de que el usuario llegue al equipo. Calidad: Resolución de hasta 1200 x 1200 dpi. Enfoque: Eficiencia energética y bajo nivel de ruido..', '$1,600.00', 'imagenes/mpc2004.png', 'COPIADORA', 'https://support.ricoh.com/bb/pub_e/dr_ut_e/0001343/0001343371/V3200/z06685L16.exe')">
+            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('Ricoh MP 2004', 'Modelo A3. 20 ppm. Resolución 1200 dpi. Eficiente y silenciosa.', '$1,600.00', 'imagenes/mpc2004.png', 'COPIADORA', 'https://support.ricoh.com/bb/pub_e/dr_ut_e/0001343/0001343371/V3200/z06685L16.exe')">
                 <div class="product-img-container"><img src="imagenes/mpc2004.png" class="group-hover:scale-110"></div>
                 <div class="p-5"><p class="text-orange-600 text-xs font-bold uppercase">COPIADORA</p><h4 class="font-bold text-gray-800">Ricoh MP 2004</h4><span class="text-2xl font-bold">$1,600.00</span></div>
             </div>
 
-            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('Ricoh MPC 3504', 'El punto de equilibrio entre velocidad y costo operativo para oficinas de volumen moderado. Velocidad: 35 ppm. Productividad: Capacidad de papel ampliable hasta 4,700 hojas. Tecnología: Soporta el procesador Intel para un manejo más rápido de archivos PDF complejos. Finalizado: Opciones de grapado sin grapas (stapleless finisher) para mayor ecología..', '$2,200.00', 'imagenes/mpc3504.jpg', 'COPIADORA', 'https://support.ricoh.com/bb/pub_e/dr_ut_e/0001343/0001343373/V3200/z06688L16.exe')">
+            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('Ricoh MPC 3504', 'Equilibrio velocidad/costo. 35 ppm. Soporta procesador Intel.', '$2,200.00', 'imagenes/mpc3504.jpg', 'COPIADORA', 'https://support.ricoh.com/bb/pub_e/dr_ut_e/0001343/0001343373/V3200/z06688L16.exe')">
                 <div class="product-img-container"><img src="imagenes/mpc3504.jpg" class="group-hover:scale-110"></div>
                 <div class="p-5"><p class="text-orange-600 text-xs font-bold uppercase">COPIADORA</p><h4 class="font-bold text-gray-800">Ricoh MPC 3504</h4><span class="text-2xl font-bold">$2,200.00</span></div>
             </div>
 
-            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('Ricoh MPC 4504', 'Diseñada para departamentos con alta demanda de documentos a color y presentaciones. Velocidad: 45 ppm. Ciclo Mensual: Soporta una carga de trabajo significativamente mayor que la C3504. Escaneo: Equipada por defecto con alimentador de documentos de un solo paso (SPDF). Personalización: Permite crear iconos de acceso directo para flujos de trabajo específicos en el panel táctil..', '$2,400.00', 'imagenes/MPC4504.jpg', 'COPIADORA', 'https://support.ricoh.com/bb/pub_e/dr_ut_e/0001343/0001343370/V3200/z06687L16.exe')">
+            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('Ricoh MPC 4504', '45 ppm. Diseñada para alta demanda de color y presentaciones profesionales.', '$2,400.00', 'imagenes/MPC4504.jpg', 'COPIADORA', 'https://support.ricoh.com/bb/pub_e/dr_ut_e/0001343/0001343370/V3200/z06687L16.exe')">
                 <div class="product-img-container"><img src="imagenes/MPC4504.jpg" class="group-hover:scale-110"></div>
                 <div class="p-5"><p class="text-orange-600 text-xs font-bold uppercase">COPIADORA</p><h4 class="font-bold text-gray-800">Ricoh MPC 4504</h4><span class="text-2xl font-bold">$2,400.00</span></div>
-            </div>
-
-            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('Ricoh MPC 5504', 'El modelo de mayor rendimiento en esta lista para entornos de producción ligera o grandes departamentos. Velocidad: 55 ppm. Velocidad de Escaneo: Idéntica a la MP 4055 (110/180 ipm), lo que la hace una excelente herramienta de digitalización masiva. Manejo de Papel: Rendimiento superior en papeles gruesos y tamaños personalizados (hasta SRA3). Potencia: Optimizada para no perder velocidad incluso al imprimir imágenes de alta densidad de color..', '$2,500.00', 'imagenes/mpc5504.png', 'COPIADORA', 'https://support.ricoh.com/bb/pub_e/dr_ut_e/0001343/0001343370/V3200/z06687L16.exe')">
-                <div class="product-img-container"><img src="imagenes/mpc5504.png" class="group-hover:scale-110"></div>
-                <div class="p-5"><p class="text-orange-600 text-xs font-bold uppercase">COPIADORA</p><h4 class="font-bold text-gray-800">Ricoh MPC 5504</h4><span class="text-2xl font-bold">$2,500.00</span></div>
-            </div>
-
-            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('Tóner B/N MP4055', 'Características Principales Color: Negro (Monocromático).  Rendimiento: Aproximadamente 37,000 páginas (basado en una cobertura del 5% o 6% en tamaño A4/Carta).  Peso del cartucho: Alrededor de 2.00 kg. Calidad de Impresión: Está formulado para ofrecer textos nítidos y negros profundos, optimizando el funcionamiento de los equipos de alto volumen. Compatibilidad Este tóner destaca por ser compatible con una amplia gama de modelos de la misma generación y series similares, incluyendo marcas del grupo Ricoh como Savin y Lanier. Modelos Ricoh Compatibles: Serie MP: MP 4054, MP 4055, MP 5054, MP 5055, MP 6054, y MP 6055. Serie IM (Modelos más recientes): IM 4000, IM 5000, y IM 6000. .', '$60.00', 'imagenes/toner.png', 'SUMINISTRO')">
-                <div class="product-img-container"><img src="imagenes/toner.png" class="group-hover:scale-110"></div>
-                <div class="p-5"><p class="text-purple-600 text-xs font-bold uppercase">SUMINISTRO</p><h4 class="font-bold text-gray-800">Tóner B/N MP4055</h4><span class="text-2xl font-bold">$60.00</span></div>
-            </div>
-
-            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('TÓNER A COLOR', 'Este consumible es totalmente compatible con las siguientes series de multifuncionales Ricoh: Serie MP C03: MP C4503, MP C5503 y MP C6003. Serie MP C04: MP C4504 y MP C6004. Tipo de Producto: Cartucho de tóner láser (Kit de 4 colores: CMYK). Colores Incluidos: Negro (Black), Cian (Cyan), Magenta y Amarillo (Yellow). Rendimiento Estimado: Negro: Aproximadamente 33,000 páginas al 5% de cobertura. Colores (C/M/Y): Aproximadamente 22,500 páginas cada uno al 5% de cobertura. Tecnología de Polvo: Tóner químico de baja temperatura de fusión para un ahorro energético eficiente y un acabado brillante en las impresiones..', '$55.00', 'imagenes/toner color.png', 'SUMINISTRO')">
-                <div class="product-img-container"><img src="imagenes/toner color.png" class="group-hover:scale-110"></div>
-                <div class="p-5"><p class="text-purple-600 text-xs font-bold uppercase">SUMINISTRO</p><h4 class="font-bold text-gray-800">TÓNER A COLOR</h4><span class="text-2xl font-bold">$55.00</span></div>
-            </div>
-
-            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition border cursor-pointer group" onclick="openModal('Mantenimiento Ricoh', 'Limpieza y calibración completa.', '$40.00', 'imagenes/ricoh.png', 'SERVICIO TÉCNICO')">
-                <div class="product-img-container"><img src="imagenes/ricoh.png" class="group-hover:scale-110"></div>
-                <div class="p-5"><p class="text-green-600 text-xs font-bold uppercase">SERVICIO TÉCNICO</p><h4 class="font-bold text-gray-800">Mantenimiento Ricoh</h4><span class="text-2xl font-bold">$40.00</span></div>
             </div>
 
         </div>
     </main>
 
-    <section id="software" class="bg-slate-900 py-16 text-white">
+    <section id="software" class="bg-slate-900 py-12 sm:py-16 text-white">
         <div class="container mx-auto px-4">
-            <h3 class="text-3xl font-bold mb-10 border-b-4 border-blue-500 inline-block pb-2">Zona de Software</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 software-card transition">
+            <h3 class="text-2xl sm:text-3xl font-bold mb-8 sm:mb-10 border-b-4 border-blue-500 inline-block pb-2">Zona de Software</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 software-card transition text-center">
                     <i class="fas fa-desktop text-4xl text-red-500 mb-4"></i>
                     <h4 class="font-bold text-xl mb-2">AnyDesk</h4>
-                    <a href="https://anydesk.com/es/downloads/thank-you?dv=win_exe" target="_blank" class="block text-center bg-red-600 py-2 rounded-lg font-bold">Descargar</a>
+                    <a href="https://anydesk.com/es/downloads/thank-you?dv=win_exe" target="_blank" class="block bg-red-600 py-2 rounded-lg font-bold">Descargar</a>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 software-card transition">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 software-card transition text-center">
                     <i class="fas fa-file-archive text-4xl text-purple-500 mb-4"></i>
                     <h4 class="font-bold text-xl mb-2">WinRAR</h4>
-                    <a href="https://www.win-rar.com/download.html" target="_blank" class="block text-center bg-purple-600 py-2 rounded-lg font-bold">Descargar</a>
+                    <a href="https://www.win-rar.com/download.html" target="_blank" class="block bg-purple-600 py-2 rounded-lg font-bold">Descargar</a>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 software-card transition">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 software-card transition text-center">
                     <i class="fas fa-signal text-4xl text-emerald-400 mb-4"></i>
                     <h4 class="font-bold text-xl mb-2">Radio PC</h4>
-                    <a href="https://www.dropbox.com/scl/fi/kitx67kn9pmdgn423rg1l/radio-pc-setup.exe?rlkey=nhixn52b1x1w7mvxongwmnved&st=4ndmipco&dl=1" target="_blank" class="block text-center bg-emerald-600 py-2 rounded-lg font-bold">Descargar</a>
+                    <a href="https://www.dropbox.com/scl/fi/kitx67kn9pmdgn423rg1l/radio-pc-setup.exe?rlkey=nhixn52b1x1w7mvxongwmnved&st=4ndmipco&dl=1" target="_blank" class="block bg-emerald-600 py-2 rounded-lg font-bold">Descargar</a>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 software-card transition">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 software-card transition text-center">
                     <i class="fas fa-broadcast-tower text-4xl text-blue-500 mb-4"></i>
                     <h4 class="font-bold text-xl mb-2">Radio APK</h4>
-                    <a href="https://www.dropbox.com/scl/fi/1jlxtw2w9y0zq1fm0toiz/app-debug.apk?rlkey=lsg572zpml3jpwvmggqkpb027&st=83lame2z&dl=1" target="_blank" class="block text-center bg-blue-600 py-2 rounded-lg font-bold">Descargar</a>
+                    <a href="https://www.dropbox.com/scl/fi/1jlxtw2w9y0zq1fm0toiz/app-debug.apk?rlkey=lsg572zpml3jpwvmggqkpb027&st=83lame2z&dl=1" target="_blank" class="block bg-blue-600 py-2 rounded-lg font-bold">Descargar</a>
                 </div>
             </div>
         </div>
@@ -251,9 +239,9 @@
                 <p class="text-gray-700 mb-2"><i class="fas fa-map-marker-alt text-blue-600 mr-2"></i> Av. Principal via Archidona, Napo-Tena-Ecuador</p>
                 <p class="text-gray-700 mb-2"><i class="fas fa-phone text-blue-600 mr-2"></i> +593 998729788</p>
                 <p class="text-gray-700 mb-6"><i class="fas fa-clock text-blue-600 mr-2"></i> Lunes a Viernes: 9am - 6pm</p>
-                <a href="#" class="bg-blue-900 text-white py-2 px-6 rounded-lg font-bold">Ver en Google Maps</a>
+                <a href="#" class="inline-block bg-blue-900 text-white py-2 px-6 rounded-lg font-bold text-sm">Ver en Google Maps</a>
             </div>
-            <div class="bg-gray-300 h-64 rounded-xl flex items-center justify-center">
+            <div class="bg-gray-300 h-48 sm:h-64 rounded-xl flex items-center justify-center">
                 <p class="text-gray-600 font-bold">MAPA RX-EXPRESS</p>
             </div>
         </div>
