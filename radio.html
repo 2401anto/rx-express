@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MI RADIO EXPRESS - Full Screen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --primary-red: #ff3c3c;
+            --glow-red: rgba(255, 60, 60, 0.8);
+            --text-white: #ffffff;
+            --chat-bg: #222;
+        }
+
+        body, html {
+            height: 100vh; margin: 0; padding: 0; overflow: hidden;
+            background-color: var(--bg-color); color: var(--text-white);
+            font-family: 'Roboto', sans-serif; display: flex; flex-direction: column;
+        }
+
+        /* --- PANTALLA DE ENTRADA (FUEGOS ARTIFICIALES) --- */
+        #intro-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: black; z-index: 9999; display: flex;
+            flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 1s ease-out;
+        }
+
+        #intro-text {
+            font-family: 'Orbitron', sans-serif; font-size: 2rem;
+            color: white; text-align: center; text-shadow: 0 0 20px var(--primary-red);
+            z-index: 10001; opacity: 0; transform: scale(0.5);
+            animation: introReveal 3s forwards;
+        }
+
+        @keyframes introReveal {
+            20% { opacity: 1; transform: scale(1.1); }
+            80% { opacity: 1; transform: scale(1); text-shadow: 0 0 40px gold; }
+            100% { opacity: 0; transform: scale(1.5); }
+        }
+
+        .firework {
+            position: absolute; width: 5px; height: 5px; border-radius: 50%;
+            box-shadow: 0 0 20px 5px gold; animation: fireworkAnim 2s infinite;
+        }
+
+        @keyframes fireworkAnim {
+            0% { transform: translateY(100vh) scale(1); opacity: 1; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-20vh) scale(20); opacity: 0; box-shadow: 0 0 50px 20px red; }
+        }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center; padding: 10px 0 0 0;
+            background: linear-gradient(to bottom, #151515, #0a0a0a);
+            border-bottom: 2px solid var(--primary-red); flex-shrink: 0; z-index: 10;
+        }
+
+        header h1 {
+            font-family: 'Orbitron', sans-serif; font-size: 1.8rem;
+            color: var(--primary-red); margin: 0; text-transform: uppercase;
+            letter-spacing: 3px; text-shadow: 0 0 15px var(--glow-red);
+        }
+
+        .wave-container {
+            margin-top: 5px; padding: 5px 20px; background: #111;
+            border-radius: 50px; border: 1px solid #333;
+            display: inline-flex; align-items: center; gap: 10px;
+        }
+
+        .promo-header-bar {
+            width: 100%; height: 35px; background: rgba(255, 60, 60, 0.2);
+            border-top: 1px solid #333; margin-top: 10px; overflow: hidden;
+            display: flex; align-items: center; position: relative;
+        }
+
+        .promo-text {
+            position: absolute; white-space: nowrap; font-family: 'Roboto', sans-serif;
+            font-size: 1.1rem; font-weight: 700; color: #fff; text-transform: uppercase;
+            animation: scrollRightToLeft 35s linear infinite;
+        }
+
+        @keyframes scrollRightToLeft {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- ESTRUCTURA --- */
+        main {
+            flex-grow: 1; display: grid; grid-template-columns: 2fr 1.2fr;
+            gap: 20px; max-width: 1300px; width: 95%; margin: 15px auto;
+            max-height: calc(100vh - 180px); z-index: 5;
+        }
+
+        .player-card {
+            background: var(--card-bg); border-radius: 15px; padding: 15px;
+            border: 1px solid #333; display: flex; flex-direction: column;
+        }
+
+        .rx-brand {
+            font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 800; color: #fff;
+            text-shadow: 0 0 10px var(--primary-red); background: rgba(255, 60, 60, 0.15);
+            padding: 4px 15px; border-radius: 4px; border-left: 4px solid var(--primary-red);
+        }
+
+        .media-container {
+            flex-grow: 1; border-radius: 10px; overflow: hidden; border: 2px solid var(--primary-red);
+            background: #000; position: relative;
+        }
+
+        .main-slide { width: 100%; height: 100%; position: absolute; opacity: 0; transition: opacity 1s; }
+        .main-slide.active { opacity: 1; }
+        .main-slide img { width: 100%; height: 100%; object-fit: cover; }
+
+        .location-tag {
+            position: absolute; bottom: 20px; left: 20px; background: var(--primary-red);
+            color: white; padding: 6px 15px; font-size: 0.9rem; font-family: 'Orbitron', sans-serif;
+            font-weight: bold; border-radius: 3px; box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        #custom-player { width: 100%; height: 40px; filter: invert(1) hue-rotate(180deg); margin-top: 10px; }
+
+        /* --- SIDEBAR --- */
+        .sidebar-column { display: flex; flex-direction: column; gap: 15px; overflow: hidden; }
+
+        .audience-card {
+            background: var(--card-bg); padding: 15px; border-radius: 15px;
+            border-top: 4px solid var(--primary-red); text-align: center;
+        }
+
+        .radar-container {
+            position: relative; width: 110px; height: 110px; margin: 10px auto;
+            background: #000; border-radius: 50%; border: 2px solid #333;
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+        }
+
+        .radar-sweep {
+            position: absolute; width: 100%; height: 100%;
+            background: conic-gradient(from 0deg, transparent, var(--primary-red));
+            opacity: 0.3; animation: rotateRadar 3s linear infinite;
+        }
+
+        @keyframes rotateRadar { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .sphere-count {
+            font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 900;
+            color: #fff; text-shadow: 0 0 10px var(--primary-red); z-index: 5;
+        }
+
+        .chat-container { 
+            background: var(--chat-bg); border-radius: 10px; flex-grow: 1;
+            display: flex; flex-direction: column; overflow: hidden; border: 1px solid #333; 
+        }
+
+        .chat-messages { flex-grow: 1; padding: 10px; overflow-y: auto; font-size: 0.8rem; display: flex; flex-direction: column; gap: 8px; }
+        .message { padding: 6px 10px; border-radius: 10px; width: fit-content; max-width: 90%; }
+        .msg-sim { background: #333; align-self: flex-start; border-left: 3px solid var(--primary-red); }
+        .msg-sim b { color: var(--primary-red); font-size: 0.7rem; display: block; }
+
+        footer { padding: 10px; text-align: center; color: #888; font-size: 0.75rem; background: #0a0a0a; flex-shrink: 0; }
+        .sound-wave { display: flex; align-items: flex-end; gap: 2px; height: 12px; }
+        .bar { width: 2px; background: var(--primary-red); animation: bounce 1s infinite alternate; }
+        @keyframes bounce { from { height: 3px; } to { height: 12px; } }
+    </style>
+</head>
+<body>
+
+    <!-- PANTALLA DE ENTRADA -->
+    <div id="intro-overlay">
+        <div id="intro-text">DESDE LA AMAZONÍA<br>TRANSMITIENDO PASIÓN</div>
+        <div class="firework" style="left: 20%; animation-delay: 0s;"></div>
+        <div class="firework" style="left: 50%; animation-delay: 0.5s;"></div>
+        <div class="firework" style="left: 80%; animation-delay: 0.2s;"></div>
+        <div class="firework" style="left: 35%; animation-delay: 0.8s;"></div>
+    </div>
+
+    <header>
+        <h1>MI RADIO EXPRESS</h1>
+        <div class="wave-container">
+            <div class="sound-wave"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+            <span class="wave-text">SINTONIZA PASIÓN LAS 24 HORAS</span>
+            <div class="sound-wave"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+        </div>
+        <div style="font-size: 0.9rem; margin-top: 5px; font-weight: bold;">
+            <span id="reloj-header">00:00:00</span> | <span id="fecha-header" style="color: #aaa;"></span>
+        </div>
+
+        <div class="promo-header-bar">
+            <div class="promo-text">
+                🚀 POTENCIA TECNOLÓGICA Y PASIÓN RADIAL EN UN SOLO LUGAR — ¡CONECTANDO TUS SENTIDOS CON LA MÁXIMA VELOCIDAD! — RX EXPRESS: TU MUNDO, TU MÚSICA, TU TECNOLOGÍA, +593998729788.
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="player-card">
+            <div class="player-status-bar" style="margin-bottom:10px; display:flex; justify-content:space-between;">
+                <span class="rx-brand">RX EXPRESS</span>
+                <span style="color:red; font-weight:bold; font-size:0.8rem;"><i class="fas fa-circle"></i> LIVE</span>
+            </div>
+
+            <div class="media-container">
+                <div id="slideshow-layer">
+                    <div class="main-slide active"><img src="imaje/puyo.png"><div class="location-tag">PASTAZA</div></div>
+                    <div class="main-slide"><img src="imaje/puy.png"><div class="location-tag">PUYO</div></div>
+                    <div class="main-slide"><img src="imaje/ten.png"><div class="location-tag">TENA</div></div>
+                    <div class="main-slide"><img src="imaje/baños.png"><div class="location-tag">BAÑOS</div></div>
+                </div>
+            </div>
+
+            <audio id="custom-player" controls>
+                <source src="http://37.157.242.102:3657/;stream.mp3" type="audio/mpeg">
+            </audio>
+        </section>
+
+        <aside class="sidebar-column">
+            <div class="audience-card">
+                <h3 style="margin:0; font-size: 0.8rem; font-weight: bold; color: var(--primary-red);">RADAR AUDIENCIA</h3>
+                <div class="radar-container">
+                    <div class="radar-sweep"></div>
+                    <span class="sphere-count" id="sphere-oyentes">1,245</span>
+                </div>
+                <span style="font-size: 0.6rem; color: #aaa;">OYENTES ACTIVOS</span>
+            </div>
+
+            <div class="info-card" style="flex-grow: 1; display: flex; flex-direction: column; overflow: hidden;">
+                <h3 style="margin:0 0 10px 0; font-size: 0.9rem; font-weight: bold;">CHAT EN VIVO</h3>
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-box"></div>
+                    <div style="display: flex; padding: 10px; gap: 5px; background: #111;">
+                        <input type="text" id="chat-input" style="flex-grow: 1; background: #000; border: 1px solid #333; color: white; padding: 8px; border-radius: 5px; font-size: 0.8rem;" placeholder="Escribe...">
+                        <button style="background: var(--primary-red); border: none; color: white; padding: 0 15px; border-radius: 5px;"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <footer>&copy; 2026 MI RADIO EXPRESS — TRANSMITIENDO EN VIVO</footer>
+
+    <script>
+        // Intro Control
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('intro-overlay').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('intro-overlay').style.display = 'none';
+                }, 1000);
+            }, 4000); // Duración de la intro
+        });
+
+        // Chat Simulado
+        const chatBox = document.getElementById('chat-box');
+        const simulatedUsers = ["RadioFan", "Puyo_Boy", "Tech_Amazon", "Express_Vip"];
+        const simulatedMessages = ["¡Excelente señal!", "Saludos desde el Tena", "Música a tope", "La mejor radio"];
+        setInterval(() => {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message msg-sim';
+            msgDiv.innerHTML = `<b>${simulatedUsers[Math.floor(Math.random()*simulatedUsers.length)]}</b> ${simulatedMessages[Math.floor(Math.random()*simulatedMessages.length)]}`;
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }, 4000);
+
+        // Reloj y Slideshow
+        setInterval(() => {
+            const ahora = new Date();
+            document.getElementById('reloj-header').innerText = ahora.toLocaleTimeString();
+            document.getElementById('fecha-header').innerText = ahora.toLocaleDateString('es-ES', {weekday:'long', day:'numeric', month:'long'});
+        }, 1000);
+
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.main-slide');
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 5000);
+
+        setInterval(() => {
+            document.getElementById('sphere-oyentes').innerText = (1240 + Math.floor(Math.random()*50)).toLocaleString();
+        }, 3000);
+    </script>
+</body>
+</html>
